@@ -1,0 +1,41 @@
+
+@font-face {
+font-family:TacticSansExd; /*set name */
+  src: url(polices/TacticSansExd-Med.woff) format("woff")
+  
+}
+
+@font-face {
+font-family:Blacksword; /*set name */
+  src: url(polices/backsword.woff) format("woff")
+  
+}
+
+
+
+body {
+	background: #eeeeee;
+	font-family:TacticSansExd
+} 
+
+ h1 {
+ 	color: lightpink;
+ 	font-size: 40px;
+ 	font-weight: normal;
+ 	text-align: center;
+ 	font-family:Blacksword
+ }
+
+  h2 {
+ 	color: hotpink;
+ 	font-weight: normal;
+ }
+
+ p {
+ 	line-height: 140%;
+ 	text-align: justify;
+ }
+ img{
+  width: 500px;
+  height:auto;
+ }
