@@ -1,13 +1,13 @@
 
 @font-face {
 font-family:TacticSansExd; /*set name */
-  src: url(polices/TacticSansExd-Med.woff) format("woff")
+  src: url("polices/TacticSansExd-Med.woff") format("woff")
   
 }
 
 @font-face {
 font-family:Blacksword; /*set name */
-  src: url(polices/Blacksword.woff) format("woff")
+  src: url("polices/Blacksword.woff") format("woff")
   
 }
 
