@@ -140,30 +140,45 @@
 	</main>
 	<script>
 		const photoboothProject = document.querySelector(".epsaa-photobooth-project");
+		const photoboothLink = photoboothProject.querySelector("a");
 		const photoboothVideo = photoboothProject.querySelector(".epsaa-photobooth-video");
-		let isHoveringPhotobooth = false;
+		let isPhotoboothActive = false;
+
+		const stopPhotoboothVideo = () => {
+			isPhotoboothActive = false;
+			photoboothProject.classList.remove("is-playing");
+			photoboothVideo.pause();
+			photoboothVideo.currentTime = 0;
+		};
+
+		const startPhotoboothVideo = () => {
+			isPhotoboothActive = true;
+			photoboothProject.classList.add("is-playing");
+			photoboothVideo.play().then(() => {
+				if (!isPhotoboothActive) {
+					stopPhotoboothVideo();
+				}
+			}).catch((error) => {
+				if (error.name === "AbortError") return;
+				stopPhotoboothVideo();
+				console.error("Impossible de lire la vidéo interactive.", error);
+			});
+		};
+
+		photoboothLink.addEventListener("click", (event) => {
+			if (event.detail === 0 || !window.matchMedia("(hover: none)").matches || isPhotoboothActive) return;
+			event.preventDefault();
+			startPhotoboothVideo();
+		});
 
 		photoboothProject.addEventListener("pointerenter", (event) => {
 			if (event.pointerType !== "mouse") return;
-			isHoveringPhotobooth = true;
-			photoboothVideo.play().then(() => {
-				if (isHoveringPhotobooth) {
-					photoboothProject.classList.add("is-playing");
-				} else {
-					photoboothVideo.pause();
-					photoboothVideo.currentTime = 0;
-				}
-			}).catch((error) => {
-				console.error("Impossible de lire la vidéo interactive.", error);
-			});
+			startPhotoboothVideo();
 		});
 
 		photoboothProject.addEventListener("pointerleave", (event) => {
 			if (event.pointerType !== "mouse") return;
-			isHoveringPhotobooth = false;
-			photoboothProject.classList.remove("is-playing");
-			photoboothVideo.pause();
-			photoboothVideo.currentTime = 0;
+			stopPhotoboothVideo();
 		});
 
 		const urbexProject = document.querySelector(".epsaa-urbex-project");
